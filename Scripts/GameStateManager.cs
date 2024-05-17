@@ -28,8 +28,18 @@ public class GameStateManager : Singleton<GameStateManager>
     }
     public void SaveEnums()
     {
+        var names = new List<string>();
+
         var text = "public enum GameStateName\r\n{";
-        foreach (var item in GameStateNames)
+        for (int i = 0; i < GameStateNames.Count; i++)
+        {
+            if (!names.Contains(GameStateNames[i]))
+            {
+                names.Add(GameStateNames[i]);
+            }
+        }
+
+        foreach (var item in names)
         {
             text += item + ",";
         }

@@ -28,9 +28,18 @@ public class UiManager : Singleton<UiManager>
     }
     public void SaveEnums()
     {
+        var names = new List<string>();
 
         var text = "public enum UIName\r\n{";
-        foreach (var item in UINames)
+        for (int i = 0; i < UINames.Count; i++)
+        {
+            if (!names.Contains(UINames[i]))
+            {
+                names.Add(UINames[i]);
+            }
+        }
+
+        foreach (var item in names)
         {
             text += item + ",";
         }
