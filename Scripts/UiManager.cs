@@ -35,7 +35,7 @@ public class UiManager : Singleton<UiManager>
             text += item + ",";
         }
         text += "}";
-        File.WriteAllText("Packages/com.danqa1337.statemachine/" + "UIName.cs", text);
+        File.WriteAllText("Packages/com.danqa1337.statemachine/Scripts/" + "UIName.cs", text);
         AssetDatabase.Refresh();
     }
 

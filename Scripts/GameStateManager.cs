@@ -34,7 +34,7 @@ public class GameStateManager : Singleton<GameStateManager>
             text += item + ",";
         }
         text += "}";
-        File.WriteAllText("Packages/com.danqa1337.statemachine/" + "GameStateName.cs", text);
+        File.WriteAllText("Packages/com.danqa1337.statemachine/Scripts/" + "GameStateName.cs", text);
         AssetDatabase.Refresh();
     }
     public static void ChangeGameState(GameStateName gameState)
