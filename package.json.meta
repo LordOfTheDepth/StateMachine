@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bfc089d7d0247cf49b9753ad68c96f03
+guid: ac0b381eb3276324d96cbb50d4c185e5
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -8,14 +8,16 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 305d72b64a2242c0b6ff1d70a6bc89f4, type: 3}
-  name: statemachine
+  name: com.danqa1337.statemachine
   version: 0.1.0
   displayName: State Machine
   description: 
   unity: 2022.3
   unityRelease: 
   dependencies:
-    keyValuePairs: []
+    keyValuePairs:
+    - key: com.danqa.basicutills
+      value: 
   keywords: []
   author:
     name: danqa1337

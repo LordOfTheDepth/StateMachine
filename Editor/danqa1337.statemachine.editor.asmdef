@@ -2,7 +2,8 @@
     "name": "danqa1337.statemachine.editor",
     "rootNamespace": "",
     "references": [
-        "GUID:ce4f1125d0fcbbf449c272c04b572ae1"
+        "GUID:ce4f1125d0fcbbf449c272c04b572ae1",
+        "GUID:fe1cab4af55f27a448d277accff602a5"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
