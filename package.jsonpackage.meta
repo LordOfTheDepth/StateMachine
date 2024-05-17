@@ -15,9 +15,7 @@ ScriptedImporter:
   unity: 2022.3
   unityRelease: 
   dependencies:
-    keyValuePairs:
-    - key: com.danqa.basicutills
-      value: 
+    keyValuePairs: []
   keywords: []
   author:
     name: danqa1337

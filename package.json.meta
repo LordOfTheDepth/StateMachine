@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ac0b381eb3276324d96cbb50d4c185e5
+guid: d4470e933a305764493ca4a7f677c2ff
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -15,9 +15,7 @@ ScriptedImporter:
   unity: 2022.3
   unityRelease: 
   dependencies:
-    keyValuePairs:
-    - key: com.danqa.basicutills
-      value: 
+    keyValuePairs: []
   keywords: []
   author:
     name: danqa1337
