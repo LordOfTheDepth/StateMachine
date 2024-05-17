@@ -1,0 +1,18 @@
+
+{
+    "name" : "com.danqa1337.statemachine",
+    "version" : "0.1.0",
+    "displayName" : "State Machine",
+    "description" : "",
+    "unity"       : "2022.3",
+    "unityRelease" : "",
+    "dependencies" : {
+    },
+    "keywords"     : [
+    ],
+    "author"       : {
+        "name" : "danqa1337",
+        "email" : "ldk99@yandex.ru",
+        "url"   : ""
+    }
+}
