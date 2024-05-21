@@ -10,8 +10,21 @@ using UnityEngine;
 
 
 
-public class UiManager : Singleton<UiManager>
+public class UiManager : MonoBehaviour
 {
+    private static UiManager _instance;
+    public static UiManager instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<UiManager>();
+            }
+            return _instance;
+        }
+
+    }
     private UiCanvas[] _uiCanvases;
     public List<string> UINames;
     public List<UiNameInput> UIPairs;

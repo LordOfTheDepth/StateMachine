@@ -5,8 +5,21 @@ using UnityEditor;
 using UnityEngine;
 
 
-public class GameStateManager : Singleton<GameStateManager>
+public class GameStateManager : MonoBehaviour
 {
+    private static GameStateManager _instance;
+    public static GameStateManager instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GameStateManager>();
+            }
+            return _instance;
+        }
+
+    }
     public List<string> GameStateNames = new List<string>();
     public static event Action<GameStateName> GameStateChanged;
 

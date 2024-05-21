@@ -1,9 +1,7 @@
 {
     "name": "danqa1337.statemachine.runtime",
     "rootNamespace": "",
-    "references": [
-        "GUID:233e5d94780316945a0c3f35287683ce"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
