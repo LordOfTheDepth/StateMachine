@@ -6,6 +6,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 
 
@@ -113,9 +114,18 @@ public class UiManager : MonoBehaviour
 
     public void OnGameStateChanged(GameStateName gameState)
     {
+        if(_uiDict.ContainsKey(gameState))
+        {
+            ShowUI(_uiDict[gameState]);
+        }
+    }
+
+    public void GenerateScripts()
+    {
         
     }
 }
+
 [Serializable]
 public struct UiNameInput
 {
