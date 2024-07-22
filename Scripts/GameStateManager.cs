@@ -41,6 +41,7 @@ public class GameStateManager : MonoBehaviour
     }
     public void SaveEnums()
     {
+#if UNITY_EDITOR
         var names = new List<string>();
 
         var text = "public enum GameStateName\r\n{";
@@ -59,6 +60,7 @@ public class GameStateManager : MonoBehaviour
         text += "}";
         File.WriteAllText("Packages/com.danqa1337.statemachine/Scripts/" + "GameStateName.cs", text);
         AssetDatabase.Refresh();
+#endif
     }
     public static void ChangeGameState(GameStateName gameState)
     {

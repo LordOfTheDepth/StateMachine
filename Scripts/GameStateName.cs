@@ -1,2 +1,2 @@
 public enum GameStateName
-{none,rrrrr,}
+{MainMenu,Items}

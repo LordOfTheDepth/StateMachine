@@ -1,13 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-
 
 
 
@@ -26,10 +22,12 @@ public class UiManager : MonoBehaviour
         }
 
     }
+
     private UiCanvas[] _uiCanvases;
     public List<string> UINames;
     public List<UiNameInput> UIPairs;
     private Dictionary<GameStateName, UIName> _uiDict;
+
 
     public void LoadEnums()
     {
@@ -40,8 +38,11 @@ public class UiManager : MonoBehaviour
             UINames.Add(value.ToString());
         }
     }
+    
+
     public void SaveEnums()
     {
+#if UNITY_EDITOR
         var names = new List<string>();
 
         var text = "public enum UIName\r\n{";
@@ -59,7 +60,9 @@ public class UiManager : MonoBehaviour
         }
         text += "}";
         File.WriteAllText("Packages/com.danqa1337.statemachine/Scripts/" + "UIName.cs", text);
+        
         AssetDatabase.Refresh();
+#endif
     }
 
     private void OnEnable()
@@ -85,7 +88,7 @@ public class UiManager : MonoBehaviour
     {
         Debug.Log("Showing UI " + uIName);
         instance.HidAll();
-        
+
         var canvas = instance.GetCanvas(uIName);
         canvas.Show();
     }
@@ -114,7 +117,7 @@ public class UiManager : MonoBehaviour
 
     public void OnGameStateChanged(GameStateName gameState)
     {
-        if(_uiDict.ContainsKey(gameState))
+        if (_uiDict.ContainsKey(gameState))
         {
             ShowUI(_uiDict[gameState]);
         }
@@ -122,7 +125,7 @@ public class UiManager : MonoBehaviour
 
     public void GenerateScripts()
     {
-        
+
     }
 }
 
