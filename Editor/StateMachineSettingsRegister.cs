@@ -194,7 +194,9 @@ static class StateMachineSettingsRegister
         EditorGUILayout.BeginHorizontal();
         if (list.Count < gameStateValues.Length && EditorGUILayout.LinkButton("Add"))
         {
-            list.Add(new UiNameInput(gameStateValues.FirstOrDefault(n => !list.Any(l => l.GameState == n)) , (UIName)0));
+            var state = gameStateValues.FirstOrDefault(n => !list.Any(l => l.GameState == n));
+            var ui = (Enum.GetValues(typeof(UIName)) as UIName[]).FirstOrDefault(u => u.ToString() == state.ToString());
+            list.Add(new UiNameInput(state ,  ui));
         }
         if (list.Count > 0 && EditorGUILayout.LinkButton("Remove"))
         {
