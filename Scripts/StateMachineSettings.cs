@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class StateMachineSettings : ScriptableObject
 {
-    public const string k_MyCustomSettingsPath = "Assets/Editor/MyCustomSettings.asset";
+    public const string k_MyCustomSettingsPath = "Assets/MyCustomSettings.asset";
 
     [SerializeField]
     private List<UiNameInput> _pairsList = new List<UiNameInput>(); 
