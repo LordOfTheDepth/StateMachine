@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 // Register a SettingsProvider using IMGUI for the drawing framework:
 static class StateMachineSettingsRegister
 {

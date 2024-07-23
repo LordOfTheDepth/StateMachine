@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 public class UiManager : MonoBehaviour
 {
     public StateMachineSettings settings;
