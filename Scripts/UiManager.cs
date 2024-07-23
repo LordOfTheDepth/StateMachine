@@ -4,11 +4,13 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-
-
-
+using UnityEngine.UIElements;
 public class UiManager : MonoBehaviour
 {
+    public StateMachineSettings settings;
+    private UiCanvas[] _uiCanvases;
+    private Dictionary<GameStateName, UIName> _uiDict;
+
     private static UiManager _instance;
     public static UiManager instance
     {
@@ -23,48 +25,6 @@ public class UiManager : MonoBehaviour
 
     }
 
-    private UiCanvas[] _uiCanvases;
-    public List<string> UINames;
-    public List<UiNameInput> UIPairs;
-    private Dictionary<GameStateName, UIName> _uiDict;
-
-
-    public void LoadEnums()
-    {
-        var values = Enum.GetValues(typeof(UIName));
-        UINames = new List<string>();
-        foreach (var value in values)
-        {
-            UINames.Add(value.ToString());
-        }
-    }
-    
-
-    public void SaveEnums()
-    {
-#if UNITY_EDITOR
-        var names = new List<string>();
-
-        var text = "public enum UIName\r\n{";
-        for (int i = 0; i < UINames.Count; i++)
-        {
-            if (!names.Contains(UINames[i]))
-            {
-                names.Add(UINames[i]);
-            }
-        }
-
-        foreach (var item in names)
-        {
-            text += item + ",";
-        }
-        text += "}";
-        File.WriteAllText("Packages/com.danqa1337.statemachine/Scripts/" + "UIName.cs", text);
-        
-        AssetDatabase.Refresh();
-#endif
-    }
-
     private void OnEnable()
     {
         GameStateManager.GameStateChanged += OnGameStateChanged;
@@ -77,7 +37,9 @@ public class UiManager : MonoBehaviour
     private void Awake()
     {
         _uiDict = new Dictionary<GameStateName, UIName>();
-        foreach (var item in UIPairs)
+        Debug.Log(settings.name);
+        Debug.Log(settings.PairsList.Count) ;
+        foreach (var item in settings.PairsList)
         {
             _uiDict.Add(item.GameState, item.UIName);
         }
@@ -113,8 +75,6 @@ public class UiManager : MonoBehaviour
             throw new System.Exception("Canvas not found: " + uIName);
         }
     }
-
-
     public void OnGameStateChanged(GameStateName gameState)
     {
         if (_uiDict.ContainsKey(gameState))
@@ -123,15 +83,19 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    public void GenerateScripts()
-    {
-
-    }
 }
 
 [Serializable]
 public struct UiNameInput
 {
-    public GameStateName GameState;
-    public UIName UIName;
+    private int _GS;
+    private int _UI;
+    public GameStateName GameState => (GameStateName)_GS;
+    public UIName UIName => (UIName)_UI;
+
+    public UiNameInput(GameStateName gameState, UIName uIName)
+    {
+        _GS = (int)gameState;
+        _UI = (int)uIName;
+    }
 }

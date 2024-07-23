@@ -1,2 +1,2 @@
 public enum UIName
-{ww,ee,u,uuu,}
+{MainMenu,Items,}

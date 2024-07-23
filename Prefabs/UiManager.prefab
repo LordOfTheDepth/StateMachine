@@ -49,14 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040ac7854f2488148ad20301188e1f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UINames:
-  - ww
-  - ee
-  - u
-  - uuu
-  UIPairs:
-  - GameState: 1
-    UIName: 1
+  settings: {fileID: 0}
 --- !u!1 &6109308592392329084
 GameObject:
   m_ObjectHideFlags: 0
@@ -66,7 +59,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5510997041087884821}
-  - component: {fileID: 5792569279518054614}
+  - component: {fileID: 374283207188104183}
   m_Layer: 0
   m_Name: Layout
   m_TagString: Untagged
@@ -90,10 +83,10 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -1000, y: -1000}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5792569279518054614
+--- !u!114 &374283207188104183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,7 +95,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6109308592392329084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -111,11 +104,9 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 1920, y: 1080}
+  m_Spacing: {x: 10, y: 10}
+  m_Constraint: 0
+  m_ConstraintCount: 2

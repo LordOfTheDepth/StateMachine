@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Canvas))]
+[RequireComponent(typeof(RectMask2D))]
 public abstract class UiCanvas : MonoBehaviour
 {
     private Canvas _canvas;
