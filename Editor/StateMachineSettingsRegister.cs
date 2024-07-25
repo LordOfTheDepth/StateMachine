@@ -176,36 +176,6 @@ static class StateMachineSettingsRegister
 
         var list = settingsObject.PairsList;
         var serializedSettings = new SerializedObject(settingsObject);
-        //var gameStateValues = Enum.GetValues(typeof(GameStateName)) as GameStateName[];
-
-        //EditorGUILayout.BeginHorizontal();
-
-        //EditorGUILayout.LabelField("GameState");
-        //EditorGUILayout.LabelField("UI");
-
-
-        //EditorGUILayout.EndHorizontal();
-
-        //for (int i = 0; i < list.Count; i++)
-        //{
-        //    var input = DrawDictElement(list[i].GameState, list[i].UIName);
-        //    if(!list.Any(t => t.GameState == input.Item1) || list[i].GameState == input.Item1)
-        //    {
-        //        list[i] = new UiNameInput(input.Item1, input.Item2);
-        //    }
-        //}
-        //EditorGUILayout.BeginHorizontal();
-        //if (list.Count < gameStateValues.Length && EditorGUILayout.LinkButton("Add"))
-        //{
-        //    var state = gameStateValues.FirstOrDefault(n => !list.Any(l => l.GameState == n));
-        //    var ui = (Enum.GetValues(typeof(UIName)) as UIName[]).FirstOrDefault(u => u.ToString() == state.ToString());
-        //    list.Add(new UiNameInput(state ,  ui));
-        //}
-        //if (list.Count > 0 && EditorGUILayout.LinkButton("Remove"))
-        //{
-        //    list.RemoveAt(list.Count - 1);
-        //}
-        //EditorGUILayout.EndHorizontal();
 
         ArrayGUI(serializedSettings, "_pairsList");
 
