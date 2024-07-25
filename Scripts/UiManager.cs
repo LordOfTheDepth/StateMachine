@@ -85,6 +85,7 @@ public class UiNameInput
 {
     //[SerializeField] private int _GS;
     //[SerializeField] private int _UI;
+
     public GameStateName GameState => _gameState;
     public UIName UIName => _ui;
     public GameStateName _gameState;
