@@ -204,7 +204,9 @@ static class StateMachineSettingsRegister
         }
         EditorGUILayout.EndHorizontal();
         
+        var settingsSer = new SerializedObject(settingsObject);
         settingsObject.GetType().GetField("_pairsList", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(settingsObject, list);
+        settingsSer.ApplyModifiedProperties();
         EditorUtility.SetDirty(settingsObject);
     }
     private static (GameStateName, UIName) DrawDictElement(GameStateName gameStateName, UIName uIName)
