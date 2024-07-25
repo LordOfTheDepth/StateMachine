@@ -49,10 +49,6 @@ static class StateMachineSettingsRegister
                     SaveEnums<UIName>(_UINames);
                     _UINames = LoadEnums<UIName>();
 
-                    var settingsObject = StateMachineSettings.GetSettings();
-                    EditorUtility.SetDirty(settingsObject);
-                    AssetDatabase.SaveAssets();
-                    AssetDatabase.Refresh();
                 }
                 
                 EditorGUILayout.Space();
@@ -177,43 +173,90 @@ static class StateMachineSettingsRegister
     {
         var settingsObject = StateMachineSettings.GetSettings();
 
+
         var list = settingsObject.PairsList;
-        var gameStateValues = Enum.GetValues(typeof(GameStateName)) as GameStateName[];
+        var serializedSettings = new SerializedObject(settingsObject);
+        //var gameStateValues = Enum.GetValues(typeof(GameStateName)) as GameStateName[];
 
-        EditorGUILayout.BeginHorizontal();
+        //EditorGUILayout.BeginHorizontal();
 
-        EditorGUILayout.LabelField("GameState");
-        EditorGUILayout.LabelField("UI");
+        //EditorGUILayout.LabelField("GameState");
+        //EditorGUILayout.LabelField("UI");
 
 
-        EditorGUILayout.EndHorizontal();
+        //EditorGUILayout.EndHorizontal();
 
-        for (int i = 0; i < list.Count; i++)
+        //for (int i = 0; i < list.Count; i++)
+        //{
+        //    var input = DrawDictElement(list[i].GameState, list[i].UIName);
+        //    if(!list.Any(t => t.GameState == input.Item1) || list[i].GameState == input.Item1)
+        //    {
+        //        list[i] = new UiNameInput(input.Item1, input.Item2);
+        //    }
+        //}
+        //EditorGUILayout.BeginHorizontal();
+        //if (list.Count < gameStateValues.Length && EditorGUILayout.LinkButton("Add"))
+        //{
+        //    var state = gameStateValues.FirstOrDefault(n => !list.Any(l => l.GameState == n));
+        //    var ui = (Enum.GetValues(typeof(UIName)) as UIName[]).FirstOrDefault(u => u.ToString() == state.ToString());
+        //    list.Add(new UiNameInput(state ,  ui));
+        //}
+        //if (list.Count > 0 && EditorGUILayout.LinkButton("Remove"))
+        //{
+        //    list.RemoveAt(list.Count - 1);
+        //}
+        //EditorGUILayout.EndHorizontal();
+
+        ArrayGUI(serializedSettings, "_pairsList");
+
+        void ArrayGUI(SerializedObject obj, string name)
         {
-            var input = DrawDictElement(list[i].GameState, list[i].UIName);
-            if(!list.Any(t => t.GameState == input.Item1) || list[i].GameState == input.Item1)
+            int arraySize = obj.FindProperty(name + ".Array.size").intValue;
+            EditorGUI.indentLevel = 3;
+            int sizeValue = EditorGUILayout.IntField("Size", arraySize);
+            if (sizeValue != arraySize)
             {
-                list[i] = new UiNameInput(input.Item1, input.Item2);
+                obj.FindProperty(name + ".Array.size").intValue = sizeValue;
+                arraySize = sizeValue;
             }
+
+            for (int i = 0; i < arraySize; i++)
+            {
+                EditorGUILayout.BeginHorizontal();
+
+                var element = obj.FindProperty(string.Format("{0}.Array.data[{1}]", name, i));
+                var prop = element.FindPropertyRelative("_gameState");
+                var prop2 = element.FindPropertyRelative("_ui");
+
+                EditorGUILayout.PropertyField(prop);
+                EditorGUILayout.PropertyField(prop2);
+
+
+                EditorGUILayout.EndHorizontal();
+
+            }
+
+            
+            obj.ApplyModifiedProperties();
+            obj.Update();
         }
-        EditorGUILayout.BeginHorizontal();
-        if (list.Count < gameStateValues.Length && EditorGUILayout.LinkButton("Add"))
-        {
-            var state = gameStateValues.FirstOrDefault(n => !list.Any(l => l.GameState == n));
-            var ui = (Enum.GetValues(typeof(UIName)) as UIName[]).FirstOrDefault(u => u.ToString() == state.ToString());
-            list.Add(new UiNameInput(state ,  ui));
-        }
-        if (list.Count > 0 && EditorGUILayout.LinkButton("Remove"))
-        {
-            list.RemoveAt(list.Count - 1);
-        }
-        EditorGUILayout.EndHorizontal();
-        
-        var settingsSer = new SerializedObject(settingsObject);
+
+        //sp.Next(true); // skip generic field
+        //sp.Next(true); // advance to array size field
+
+        //// Get the array size
+        //arrayLength = sp.intValue;
+
+        //List<int> values = new List<int>(arrayLength);
+        //int lastIndex = arrayLength - 1;
+        //for (int i = 0; i < arrayLength; i++)
+        //{
+        //    values.Add(sp.intValue); // copy the value to the list
+        //    if (i < lastIndex) sp.Next(false); // advance without drilling into children
+        //}
 
 
         settingsObject.GetType().GetField("_pairsList", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(settingsObject, list);
-        settingsSer.ApplyModifiedProperties();
 
     }
     private static (GameStateName, UIName) DrawDictElement(GameStateName gameStateName, UIName uIName)

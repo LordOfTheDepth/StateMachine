@@ -81,16 +81,18 @@ public class UiManager : MonoBehaviour
 }
 
 [Serializable]
-public struct UiNameInput
+public class UiNameInput
 {
-    private int _GS;
-    private int _UI;
-    public GameStateName GameState => (GameStateName)_GS;
-    public UIName UIName => (UIName)_UI;
+    //[SerializeField] private int _GS;
+    //[SerializeField] private int _UI;
+    public GameStateName GameState => _gameState;
+    public UIName UIName => _ui;
+    public GameStateName _gameState;
+    public UIName _ui;
 
-    public UiNameInput(GameStateName gameState, UIName uIName)
+    public UiNameInput(GameStateName gameState, UIName ui)
     {
-        _GS = (int)gameState;
-        _UI = (int)uIName;
+        _gameState = gameState;
+        _ui = ui;
     }
 }
