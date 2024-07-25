@@ -48,6 +48,11 @@ static class StateMachineSettingsRegister
 
                     SaveEnums<UIName>(_UINames);
                     _UINames = LoadEnums<UIName>();
+
+                    var settingsObject = StateMachineSettings.GetSettings();
+                    EditorUtility.SetDirty(settingsObject);
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
                 }
                 
                 EditorGUILayout.Space();
@@ -206,16 +211,10 @@ static class StateMachineSettingsRegister
         
         var settingsSer = new SerializedObject(settingsObject);
 
-        if (settingsObject.PairsList != list)
-        {
-            settingsObject.GetType().GetField("_pairsList", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(settingsObject, list);
-            settingsSer.ApplyModifiedProperties();
 
+        settingsObject.GetType().GetField("_pairsList", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(settingsObject, list);
+        settingsSer.ApplyModifiedProperties();
 
-            EditorUtility.SetDirty(settingsObject);
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-        }
     }
     private static (GameStateName, UIName) DrawDictElement(GameStateName gameStateName, UIName uIName)
     {
