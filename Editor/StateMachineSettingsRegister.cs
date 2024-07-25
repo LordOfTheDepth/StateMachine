@@ -205,11 +205,17 @@ static class StateMachineSettingsRegister
         EditorGUILayout.EndHorizontal();
         
         var settingsSer = new SerializedObject(settingsObject);
-        settingsObject.GetType().GetField("_pairsList", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(settingsObject, list);
-        settingsSer.ApplyModifiedProperties();
-        EditorUtility.SetDirty(settingsObject);
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
+
+        if (settingsObject.PairsList != list)
+        {
+            settingsObject.GetType().GetField("_pairsList", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(settingsObject, list);
+            settingsSer.ApplyModifiedProperties();
+
+
+            EditorUtility.SetDirty(settingsObject);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
     }
     private static (GameStateName, UIName) DrawDictElement(GameStateName gameStateName, UIName uIName)
     {
