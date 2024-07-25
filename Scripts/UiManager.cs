@@ -36,7 +36,11 @@ public class UiManager : MonoBehaviour
         _uiDict = new Dictionary<GameStateName, UIName>();
         foreach (var item in settings.PairsList)
         {
-            _uiDict.Add(item.GameState, item.UIName);
+            if(!_uiDict.ContainsKey(item.GameState))
+            {
+                _uiDict.Add(item.GameState, item.UIName);
+            }
+            
         }
         _uiCanvases = GetComponentsInChildren<UiCanvas>();
     }
