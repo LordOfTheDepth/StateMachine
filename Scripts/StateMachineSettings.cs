@@ -26,8 +26,9 @@ public class StateMachineSettings : ScriptableObject
             UnityEditor.AssetDatabase.CreateAsset(settings, k_MyCustomSettingsPath);
             UnityEditor.AssetDatabase.SaveAssets();
         }
-#endif
         return settings;
+#endif
+        return null;
     }
 
     public static StateMachineSettings GetSettings()

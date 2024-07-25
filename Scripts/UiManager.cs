@@ -34,8 +34,6 @@ public class UiManager : MonoBehaviour
     private void Awake()
     {
         _uiDict = new Dictionary<GameStateName, UIName>();
-        Debug.Log(settings.name);
-        Debug.Log(settings.PairsList.Count) ;
         foreach (var item in settings.PairsList)
         {
             _uiDict.Add(item.GameState, item.UIName);
