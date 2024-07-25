@@ -203,7 +203,9 @@ static class StateMachineSettingsRegister
             list.RemoveAt(list.Count - 1);
         }
         EditorGUILayout.EndHorizontal();
+        
         settingsObject.GetType().GetField("_pairsList", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(settingsObject, list);
+        EditorUtility.SetDirty(settingsObject);
     }
     private static (GameStateName, UIName) DrawDictElement(GameStateName gameStateName, UIName uIName)
     {
