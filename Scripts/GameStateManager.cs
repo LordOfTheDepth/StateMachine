@@ -32,7 +32,7 @@ public class GameStateManager : MonoBehaviour
         instance._history.Push(CurrentGameState);
         SetAppState(gameState);
     }
-    private void Awake()
+    private void Start()
     {
         ChangeGameState(_currentGameState);
     }
