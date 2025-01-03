@@ -97,21 +97,26 @@ static class StateMachineSettingsRegister
     }
     private static List<string> LoadEnums<T>()
     {
-        dynamic values;
+        
+        var result = new List<string>();
+
         if (File.Exists(MainDataPath + typeof(T).ToString() + ".txt"))
         {
-            values = JsonUtility.FromJson<EnumData>(File.ReadAllText(MainDataPath + typeof(T).ToString() + ".txt")).names;
+            var values = JsonUtility.FromJson<EnumData>(File.ReadAllText(MainDataPath + typeof(T).ToString() + ".txt")).names;
+            foreach (var value in values)
+            {
+                result.Add(value);
+            }
         }
         else
         {
-            values = Enum.GetValues(typeof(T));
+            var values = Enum.GetValues(typeof(T));
+            foreach (var value in values)
+            {
+                result.Add(value.ToString());
+            }
+        }
 
-        }
-        var result = new List<string>();
-        foreach (var value in values)
-        {
-            result.Add(value);
-        }
         return result;
     }
     private static void SaveEnums<T>(List<string> names)
