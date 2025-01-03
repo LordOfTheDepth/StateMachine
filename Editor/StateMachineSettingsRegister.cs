@@ -8,6 +8,9 @@ using UnityEngine;
 // Register a SettingsProvider using IMGUI for the drawing framework:
 static class StateMachineSettingsRegister
 {
+    private const string MainDataPath = "Assets/StateMachine/";
+    private const string PackageDirectoryPath = "Packages/com.danqa1337.statemachine/Scripts/";
+    private const string ScriptsDirectoryPath = "Assets/StateMachine/Scripts/";
     private static List<string> _gameStateNames = new List<string>() {};
     private static List<string> _UINames = new List<string>() {};
     [SettingsProvider]
@@ -94,20 +97,32 @@ static class StateMachineSettingsRegister
     }
     private static List<string> LoadEnums<T>()
     {
-        var values = Enum.GetValues(typeof(T));
+        dynamic values;
+        if (File.Exists(MainDataPath + typeof(T).ToString() + ".txt"))
+        {
+            values = JsonUtility.FromJson<EnumData>(File.ReadAllText(MainDataPath + typeof(T).ToString() + ".txt")).names;
+        }
+        else
+        {
+            values = Enum.GetValues(typeof(T));
+
+        }
         var result = new List<string>();
         foreach (var value in values)
         {
-            result.Add(value.ToString());
+            result.Add(value);
         }
         return result;
     }
     private static void SaveEnums<T>(List<string> names)
     {
+        var data = new EnumData { names = names.ToArray() };
+
+        File.WriteAllText(MainDataPath + typeof(T).ToString() + ".txt", JsonUtility.ToJson(data));
+        
+
 
         var text = "public enum " + typeof(T).ToString() + "\r\n{";
-
-
         var filteredNames = new List<string>();
 
         foreach (var name in names)
@@ -130,19 +145,18 @@ static class StateMachineSettingsRegister
             text += item + ",";
         }
         text += "}";
-        var packageDirectoryPath = "Packages/com.danqa1337.statemachine/Scripts/";
-        var assetsDirectoryPath = "Assets/StateMachine/Scripts/";
+
         var fileName = typeof(T).ToString() + ".cs";
         var finalPath = "";
 
 
-        if (Directory.Exists(packageDirectoryPath))
+        if (Directory.Exists(PackageDirectoryPath))
         {
-            finalPath = packageDirectoryPath + fileName;
+            finalPath = PackageDirectoryPath + fileName;
         }
         else
         {
-            finalPath = assetsDirectoryPath + fileName;
+            finalPath = ScriptsDirectoryPath + fileName;
         }
 
         var isRealyNeedToWrite = true;
@@ -237,6 +251,10 @@ static class StateMachineSettingsRegister
         EditorGUILayout.EndHorizontal();
         return (gameStateName, uIName);
     }
-    
+    [Serializable]
+    private class EnumData
+    {
+        public string[] names;
+    }
 }
 
