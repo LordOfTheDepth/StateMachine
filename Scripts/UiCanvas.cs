@@ -8,7 +8,7 @@ public abstract class UiCanvas : MonoBehaviour
     private Canvas _canvas;
     public abstract UIName UIName { get; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _canvas = GetComponent<Canvas>();
     }
